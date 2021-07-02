@@ -65,7 +65,14 @@ CREATE TABLE IF NOT EXISTS `blood donation`.`donor` (
   `donor_gender` TINYTEXT NOT NULL,
   `donor_contact` VARCHAR(20) NOT NULL,
   `donor_address` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`donor_id`))
+  `blood_bank_BBNAME` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`donor_id`),
+  INDEX `fk_donor_blood_bank1_idx` (`blood_bank_BBNAME` ASC) VISIBLE,
+  CONSTRAINT `fk_donor_blood_bank1`
+    FOREIGN KEY (`blood_bank_BBNAME`)
+    REFERENCES `blood donation`.`blood_bank` (`BBNAME`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 21
 DEFAULT CHARACTER SET = utf8mb4
@@ -118,7 +125,14 @@ CREATE TABLE IF NOT EXISTS `blood donation`.`recepient` (
   `recepient_gender` TINYTEXT NOT NULL,
   `recepient_contact` VARCHAR(20) NOT NULL,
   `recepient_address` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`recepient_id`))
+  `blood_bank_BBNAME` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`recepient_id`),
+  INDEX `fk_recepient_blood_bank1_idx` (`blood_bank_BBNAME` ASC) VISIBLE,
+  CONSTRAINT `fk_recepient_blood_bank1`
+    FOREIGN KEY (`blood_bank_BBNAME`)
+    REFERENCES `blood donation`.`blood_bank` (`BBNAME`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb4
